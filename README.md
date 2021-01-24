@@ -1,24 +1,65 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column          | Type   | Options      |
+|-----------------|--------|--------------|
+| nickname        | text   | unique: true |
+| email           | string | null: false  |
+| password        | string | null: false  |
+| full_width_name | text   | null: false  |
+| kana_name       | text   | null: false  |
+| birthday        | text   | null: false  |
 
-* Ruby version
+### Association
 
-* System dependencies
+* has_many :items
+* has_many :buys
 
-* Configuration
+## items table
 
-* Database creation
+| Column        | Type       | Options           |
+|---------------|------------|-------------------|
+| user          | references | foreign_key: true |
+| item_name     | text       | null: false       |
+| text          | text       | null: false       |
+| category      | text       | null: false       |
+| state         | text       | null: false       |
+| delivery_fee  | text       | null: false       |
+| area          | text       | null: false       |
+| delivery_date | text       | null: false       |
+| price         | string     | null: false       |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+* belongs_to :user
+* has_one :buy
 
-* Services (job queues, cache servers, search engines, etc.)
+## buys table
 
-* Deployment instructions
+| Column  | Type       | Options           |
+|---------|------------|-------------------|
+| user    | references | foreign_key: true |
+| item_id | references | foreign_key: true |
 
-* ...
+### Association
+
+* belongs_to :user
+* belongs_to :item
+* has_one :destination
+
+## destinations table
+
+| Column          | Type       | Options           |
+|-----------------|------------|-------------------|
+| buy_id          | references | foreign_key: true |
+| postal_code     | string     | null: false       |
+| delivery_area   | text       | null: false       |
+| municipal_name  | text       | null: false       |
+| house_number    | text       | null: false       |
+| building_name   | text       | null: false       |
+| tell            | string     | null: false       |
+
+### Association
+
+* belongs_to :buy
