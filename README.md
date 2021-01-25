@@ -7,10 +7,10 @@
 | nickname           | string | unique: true |
 | email              | string | null: false  |
 | encrypted_password | string | null: false  |
-| family_name        | text   | null: false  |
-| first_name         | text   | null: false  |
-| kana_family_name   | text   | null: false  |
-| kana_first_name    | text   | null: false  |
+| family_name        | string | null: false  |
+| first_name         | string | null: false  |
+| kana_family_name   | string | null: false  |
+| kana_first_name    | string | null: false  |
 | birthday           | date   | null: false  |
 
 ### Association
@@ -20,17 +20,17 @@
 
 ## items table
 
-| Column        | Type       | Options           |
-|---------------|------------|-------------------|
-| user          | references | foreign_key: true |
-| name          | text       | null: false       |
-| description   | text       | null: false       |
-| category      | integer    | null: false       |
-| state         | integer    | null: false       |
-| delivery_fee  | integer    | null: false       |
-| area          | integer    | null: false       |
-| delivery_date | integer    | null: false       |
-| price         | integer    | null: false       |
+| Column           | Type       | Options           |
+|------------------|------------|-------------------|
+| user             | references | foreign_key: true |
+| name             | text       | null: false       |
+| description      | text       | null: false       |
+| category_id      | integer    | null: false       |
+| state_id         | integer    | null: false       |
+| delivery_fee_id  | integer    | null: false       |
+| area_id          | integer    | null: false       |
+| delivery_date_id | integer    | null: false       |
+| price            | integer    | null: false       |
 
 ### Association
 
@@ -52,15 +52,15 @@
 
 ## destinations table
 
-| Column          | Type       | Options           |
-|-----------------|------------|-------------------|
-| item            | references | foreign_key: true |
-| postal_code     | string     | null: false       |
-| delivery_area   | text       | null: false       |
-| municipal_name  | text       | null: false       |
-| house_number    | text       | null: false       |
-| building_name   | text       |                   |
-| tell            | string     | null: false       |
+| Column           | Type       | Options           |
+|------------------|------------|-------------------|
+| buy              | references | foreign_key: true |
+| postal_code      | string     | null: false       |
+| area_id          | integer    | null: false       |
+| municipal_name   | string     | null: false       |
+| house_number     | string     | null: false       |
+| building_name    | string     |                   |
+| tell             | string     | null: false       |
 
 ### Association
 
