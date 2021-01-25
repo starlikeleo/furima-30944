@@ -7,8 +7,10 @@
 | nickname           | string | unique: true |
 | email              | string | null: false  |
 | encrypted_password | string | null: false  |
-| full_width_name    | text   | null: false  |
-| kana_name          | text   | null: false  |
+| family_name        | text   | null: false  |
+| first_name         | text   | null: false  |
+| kana_family_name   | text   | null: false  |
+| kana_first_name    | text   | null: false  |
 | birthday           | date   | null: false  |
 
 ### Association
