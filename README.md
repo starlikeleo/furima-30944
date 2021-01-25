@@ -54,13 +54,13 @@
 
 | Column          | Type       | Options           |
 |-----------------|------------|-------------------|
-| buy             | references | foreign_key: true |
+| item            | references | foreign_key: true |
 | postal_code     | string     | null: false       |
 | delivery_area   | text       | null: false       |
 | municipal_name  | text       | null: false       |
 | house_number    | text       | null: false       |
-| building_name   | text       | null: false       |
-| tell            | string     | none              |
+| building_name   | text       |                   |
+| tell            | string     | null: false       |
 
 ### Association
 
