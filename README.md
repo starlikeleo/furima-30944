@@ -2,14 +2,14 @@
 
 ## users table
 
-| Column          | Type   | Options      |
-|-----------------|--------|--------------|
-| nickname        | text   | unique: true |
-| email           | string | null: false  |
-| password        | string | null: false  |
-| full_width_name | text   | null: false  |
-| kana_name       | text   | null: false  |
-| birthday        | text   | null: false  |
+| Column             | Type   | Options      |
+|--------------------|--------|--------------|
+| nickname           | string | unique: true |
+| email              | string | null: false  |
+| encrypted_password | string | null: false  |
+| full_width_name    | text   | null: false  |
+| kana_name          | text   | null: false  |
+| birthday           | date   | null: false  |
 
 ### Association
 
@@ -21,14 +21,14 @@
 | Column        | Type       | Options           |
 |---------------|------------|-------------------|
 | user          | references | foreign_key: true |
-| item_name     | text       | null: false       |
-| text          | text       | null: false       |
-| category      | text       | null: false       |
-| state         | text       | null: false       |
-| delivery_fee  | text       | null: false       |
-| area          | text       | null: false       |
-| delivery_date | text       | null: false       |
-| price         | string     | null: false       |
+| name          | text       | null: false       |
+| description   | text       | null: false       |
+| category      | integer    | null: false       |
+| state         | integer    | null: false       |
+| delivery_fee  | integer    | null: false       |
+| area          | integer    | null: false       |
+| delivery_date | integer    | null: false       |
+| price         | integer    | null: false       |
 
 ### Association
 
@@ -40,7 +40,7 @@
 | Column  | Type       | Options           |
 |---------|------------|-------------------|
 | user    | references | foreign_key: true |
-| item_id | references | foreign_key: true |
+| item    | references | foreign_key: true |
 
 ### Association
 
@@ -52,13 +52,13 @@
 
 | Column          | Type       | Options           |
 |-----------------|------------|-------------------|
-| buy_id          | references | foreign_key: true |
+| buy             | references | foreign_key: true |
 | postal_code     | string     | null: false       |
 | delivery_area   | text       | null: false       |
 | municipal_name  | text       | null: false       |
 | house_number    | text       | null: false       |
 | building_name   | text       | null: false       |
-| tell            | string     | null: false       |
+| tell            | string     | none              |
 
 ### Association
 
