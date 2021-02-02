@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   validates :encrypted_password, :password, :password_confirmation, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/ }
 
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/ } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ } do
     validates :family_name
     validates :first_name
   end
