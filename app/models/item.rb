@@ -22,7 +22,7 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :area_id
     validates :delivery_date_id
-    validates :price
+    validates :price,           format: { with: /\A[0-9]+\z/ }
   end
   
 end
