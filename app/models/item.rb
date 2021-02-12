@@ -8,11 +8,13 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :category_id,       numericality: { other_than: 0 }
-  validates :state_id,          numericality: { other_than: 0 }
-  validates :delivery_fee_id,   numericality: { other_than: 0 }
-  validates :area_id,           numericality: { other_than: 0 }
-  validates :delivery_date_id,  numericality: { other_than: 0 }
+  with_options numericality: { other_than: 0 } do
+    validates :category_id
+    validates :state_id
+    validates :delivery_fee_id
+    validates :area_id
+    validates :delivery_date_id
+  end
 
   with_options presence: true do
     validates :name

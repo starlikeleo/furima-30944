@@ -37,6 +37,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
+      it '発送までの日数についての情報が空' do
+        @item.delivery_date_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
       it '商品の状態についての情報が空' do
         @item.state_id = ''
         @item.valid?
@@ -57,23 +62,42 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
+      it 'カテゴリー、商品の状態、配送料の負担、配送元の地域、発送までの日数で---を選択している' do
+        @item.category_id = '0'
+        @item.state_id = '0'
+        @item.delivery_fee_id = '0'
+        @item.area_id = '0'
+        @item.delivery_date_id = '0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
       it '価格についての情報が空' do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
       it '価格が300円未満' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
       it '価格が10,000,000円以上' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
       it '価格に半角数字以外が含まれている' do
         @item.price = 'A0000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
+      it '価格が半角英数のみ' do
+        @item.price = 'ABCDEFGH'
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
+      it '価格に全角文字が含まれている' do
+        @item.price = 'あいうえお'
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
