@@ -37,8 +37,8 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
-      it '発送までの日数についての情報が空' do
-        @item.delivery_date_id = ''
+      it '商品のカテゴリーで---を選択している' do
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
@@ -47,8 +47,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
+      it '商品の状態で---を選択している' do
+        @item.state_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
       it '配送料の負担についての情報が空' do
         @item.delivery_fee_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
+      it '配送料の負担で---を選択している' do
+        @item.delivery_fee_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
@@ -57,17 +67,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
+      it '発送元の地域で---を選択している' do
+        @item.area_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include
+      end
       it '発送までの日数についての情報が空' do
         @item.delivery_date_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
-      it 'カテゴリー、商品の状態、配送料の負担、配送元の地域、発送までの日数で---を選択している' do
-        @item.category_id = '0'
-        @item.state_id = '0'
-        @item.delivery_fee_id = '0'
-        @item.area_id = '0'
-        @item.delivery_date_id = '0'
+      it '発送までの日数で---を選択している' do
+        @item.delivery_date_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include
       end
