@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :category_id,       numericality: { other_than: 0 } 
+  validates :category_id,       numericality: { other_than: 0 }
   validates :state_id,          numericality: { other_than: 0 }
   validates :delivery_fee_id,   numericality: { other_than: 0 }
   validates :area_id,           numericality: { other_than: 0 }
@@ -22,7 +22,6 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :area_id
     validates :delivery_date_id
-    validates :price,           format: { with: /\A[0-9]+\z/ }
+    validates :price, format: { with: /\A[0-9]+\z/ }
   end
-  
 end
