@@ -20,7 +20,7 @@ RSpec.describe Item, type: :model do
       it '画像がついていない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include()
+        expect(@item.errors.full_messages).to include
       end
       it '商品名が空' do
         @item.name = ''
@@ -40,7 +40,7 @@ RSpec.describe Item, type: :model do
       it '商品のカテゴリーで---を選択している' do
         @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 0")
+        expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
       it '商品の状態についての情報が空' do
         @item.state_id = ''
@@ -50,7 +50,7 @@ RSpec.describe Item, type: :model do
       it '商品の状態で---を選択している' do
         @item.state_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("State must be other than 0")
+        expect(@item.errors.full_messages).to include('State must be other than 0')
       end
       it '配送料の負担についての情報が空' do
         @item.delivery_fee_id = nil
@@ -60,7 +60,7 @@ RSpec.describe Item, type: :model do
       it '配送料の負担で---を選択している' do
         @item.delivery_fee_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery fee must be other than 0")
+        expect(@item.errors.full_messages).to include('Delivery fee must be other than 0')
       end
       it '発送元の地域についての情報が空' do
         @item.area_id = ''
@@ -70,7 +70,7 @@ RSpec.describe Item, type: :model do
       it '発送元の地域で---を選択している' do
         @item.area_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area must be other than 0")
+        expect(@item.errors.full_messages).to include('Area must be other than 0')
       end
       it '発送までの日数についての情報が空' do
         @item.delivery_date_id = ''
@@ -80,7 +80,7 @@ RSpec.describe Item, type: :model do
       it '発送までの日数で---を選択している' do
         @item.delivery_date_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery date must be other than 0")
+        expect(@item.errors.full_messages).to include('Delivery date must be other than 0')
       end
       it '価格についての情報が空' do
         @item.price = ''
@@ -90,27 +90,27 @@ RSpec.describe Item, type: :model do
       it '価格が300円未満' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than 300')
       end
       it '価格が10,000,000円以上' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+        expect(@item.errors.full_messages).to include('Price must be less than 10000000')
       end
       it '価格に半角数字以外が含まれている' do
         @item.price = 'A0000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が半角英数のみ' do
         @item.price = 'ABCDEFGH'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格に全角文字が含まれている' do
         @item.price = 'あいうえお'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
