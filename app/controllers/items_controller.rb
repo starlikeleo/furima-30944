@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :contributor_confirmation, only: [:edit, :update]
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order('created_at DESC')
@@ -26,6 +26,14 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to item_path(@item)
+    end
+  end
+
   def update
     if @item.update(item_params)
       redirect_to item_path(@item)
@@ -34,11 +42,10 @@ class ItemsController < ApplicationController
     end
   end
 
-
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :description, :category_id, :state_id, :delivery_fee_id, :area_id, :delivery_date_id, :price)
+    params.require(:item).permit(:name, :image, :description, :category_id, :state_id, :delivery_fee_id, :area_id,:delivery_date_id, :price)
     .merge(user_id: current_user.id)
   end
 
