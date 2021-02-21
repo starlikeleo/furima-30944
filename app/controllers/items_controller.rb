@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
     if @item.destroy
       redirect_to root_path
     else
-      redirect_to root_path
+      redirect_to item_path(@item)
     end
   end
 
@@ -45,9 +45,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :description, :category_id, :state_id, :delivery_fee_id, :area_id,
-                                 :delivery_date_id, :price)
-          .merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :image, :description, :category_id, :state_id, :delivery_fee_id, :area_id,:delivery_date_id, :price)
+    .merge(user_id: current_user.id)
   end
 
   def set_item
