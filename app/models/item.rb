@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_date
   belongs_to :user
   has_one_attached :image
+  has_one :buy
 
   with_options numericality: { other_than: 0 } do
     validates :category_id
