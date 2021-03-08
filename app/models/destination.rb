@@ -1,3 +1,3 @@
-class Destination < ApplicationRecord
-  belongs_to :buy
+class destination < ActiveRecord::Base
+  belongs_to :buys
 end
