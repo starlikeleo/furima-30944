@@ -1,22 +1,18 @@
 class  BuysController < ApplicationController
-  before_action :set_item, except: [:index, :new, :create]
 
   def index
-    @buy_destination = BuyDestination.index(destination_params)
-  end
-
-  def new
+    @item = Item.find(params[:item_id])
     @buy_destination = BuyDestination.new
   end
  
   def create
     @buy_destination = BuyDestination.create(destination_params)
-      if @buy_destination.valid?
-        @buy_destination.save
+    if  @buy_destination.valid?
+          @buy_destination.save
         redirect_to action: :index
-      else
-        redirect_to action: :index
-      end
+    else
+      redirect_to action: :index
+    end
   end
 
   private
