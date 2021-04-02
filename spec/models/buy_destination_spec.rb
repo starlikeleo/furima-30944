@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe UserDonation, type: :model do
+RSpec.describe BuyDestination, type: :model do
   describe '商品購入情報の保存' do
     before do
-      @buy_destination = FactoryBot.build(:buy_destination)
+      @buy_destination = FactoryBot.build(:BuyDestination)
     end
 
     it 'すべての値が正しく入力されていれば保存できること' do
+      expect(@buy_destination).to be_valid
     end
     it 'nameが空だと保存できないこと' do
     end

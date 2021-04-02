@@ -1,7 +1,7 @@
 class BuyDestination
 
   include ActiveModel::Model
-  attr_accessor :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, user_id:, :item_id
+  attr_accessor :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, :user_id, :item_id, :area_id
 
   #切り取ったバリデーションをここに移動
   with_options presence: true do
@@ -14,7 +14,8 @@ class BuyDestination
 
   def save
     buy = Buys.create(user_id: buys.user_id, item_id: params[:item_id])
-    Destination.create(postal_code: postal_code, delivery_area_id: delivery_area_id, municipal_name: municipal_name, house_number: house_number, tell: tell)
+    Destination.create(postal_code: postal_code, delivery_area_id: delivery_area_id, municipal_name: municipal_name, 
+      house_number: house_number, tell: tell)
   end
 
 end
