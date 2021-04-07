@@ -1,4 +1,5 @@
 class  BuysController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -6,19 +7,31 @@ class  BuysController < ApplicationController
   end
  
   def create
+    @item = Item.find(params[:item_id])
     @buy_destination = BuyDestination.new(destination_params)
     if  @buy_destination.valid?
-          @buy_destination.save
-          redirect_to action: :index
+      pay_item
+      @buy_destination.save
+      return redirect_to root_path
     else
-      redirect_to action: :index
+      # redirect_to action: :index
+      render 'index'
     end
   end
 
   private
    # 全てのストロングパラメーターを1つに統合
   def destination_params
-    params.require(:buy_destination).permit(:postal_code, :delivery_area_id, :municipal_name,:house_number, :building_name, :area_id, :tell)
-    .merge(user_id: params[:user_id], item_id: params[:item_id])
+    params.require(:buy_destination).permit(:postal_code, :delivery_area_id, :municipal_name,:house_number, :building_name, :tell)
+    .merge(user: current_user.id, item: params[:item_id], token: params[:token])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: destination_params[:token],
+      currency: 'jpy'
+    )
   end
 end

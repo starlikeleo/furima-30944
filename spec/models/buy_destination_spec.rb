@@ -9,37 +9,55 @@ RSpec.describe BuyDestination, type: :model do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@buy_destination).to be_valid
     end
-    it 'nameが空だと保存できないこと' do
+    it 'building_nameは空でも保存できること' do
+      @buy_destination.building_name = ''
+      expect(@buy_destination).to be_valid
     end
-    it 'nameが全角日本語でないと保存できないこと' do
-    end
-    it 'name_readingが空だと保存できないこと' do
-    end
-    it 'name_readingが全角日本語でないと保存できないこと' do
-    end
-    it 'nicknameが空だと保存できないこと' do
-    end
-    it 'nicknameが半角でないと保存できないこと' do
-    end
+
     it 'postal_codeが空だと保存できないこと' do
+      @buy_destination.postal_code = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Postal code can't be blank")     
     end
     it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+      @buy_destination.postal_code = '1234567'
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
     end
-    it 'prefectureを選択していないと保存できないこと' do
+    it 'delivery_area_idが空だと保存できないこと' do
+      @buy_destination.delivery_area_id = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Delivery area can't be blank")
     end
-    it 'cityは空でも保存できること' do
+    it 'house_numberが空だと保存できないこと' do
+      @buy_destination.house_number = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("House number can't be blank")     
     end
-    it 'house_numberは空でも保存できること' do
+    it 'municipal_nameが空だと保存できないこと' do
+      @buy_destination.municipal_name = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Municipal name can't be blank")     
     end
-    it 'building_nameは空でも保存できること' do
+    it 'tellが空だと保存できないこと' do
+      @buy_destination.tell = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Tell can't be blank")     
     end
-    it 'priceが空だと保存できないこと' do
+    it 'userが空だと保存できないこと' do
+      @buy_destination.user = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("User can't be blank")     
     end
-    it 'priceが全角数字だと保存できないこと' do
+    it 'itemが空だと保存できないこと' do
+      @buy_destination.item = ''
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Item can't be blank")     
     end
-    it 'priceが1円未満では保存できないこと' do
-    end
-    it 'priceが1,000,000円を超過すると保存できないこと' do
+    it "tokenが空だと登録できないこと" do
+      @buy_destination.token = nil
+      @buy_destination.valid?
+      expect(@buy_destination.errors.full_messages).to include("Token can't be blank")
     end
   end
 end

@@ -1,21 +1,22 @@
 class BuyDestination
 
   include ActiveModel::Model
-  attr_accessor :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, :user_id, :item_id, :area_id
+  attr_accessor :user, :item, :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, :token
 
   #切り取ったバリデーションをここに移動
   with_options presence: true do
-    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :delivery_area_id, numericality: { other_than: 0, message: "can't be blank" }
-    validates :municipal_name
+    validates :delivery_area_id,  numericality: { other_than: 0, message: "can't be blank" }
     validates :house_number
+    validates :item
+    validates :municipal_name
+    validates :postal_code,       format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :tell
+    validates :user
+    validates :token
   end
 
   def save
-    buy = Buys.create(user_id: buys.user_id, item_id: params[:item_id])
-    Destination.create(postal_code: postal_code, delivery_area_id: delivery_area_id, municipal_name: municipal_name, 
-      house_number: house_number, tell: tell)
+    buy = Buy.create(user_id: user, item_id: item)
+    Destination.create(buy_id: buy.id, postal_code: postal_code, delivery_area_id: delivery_area_id, municipal_name: municipal_name, house_number: house_number, tell: tell)
   end
-
 end
