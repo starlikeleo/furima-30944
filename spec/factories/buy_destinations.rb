@@ -5,8 +5,8 @@ FactoryBot.define do
     municipal_name        { '狭山市' }
     house_number          { '稲荷山2-3' }
     tell                  { '09012345678' }
-    user                  { '1' }
-    item                  { '1' }
+    association :user
+    association :item
     token                 {"tok_abcdefghijk00000000000000000"}
   end
 end
