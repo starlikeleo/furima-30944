@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    @buys = Buy.all  
   end
   def new
     @item = Item.new
