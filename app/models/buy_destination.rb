@@ -3,14 +3,15 @@ class BuyDestination
   include ActiveModel::Model
   attr_accessor :user, :item, :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, :token
 
-  #切り取ったバリデーションをここに移動
+  VALID_PHONE_NUMBER_REGEX = /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z|\A0[5789]0[-]?\d{4}[-]?\d{4}\z/
+
   with_options presence: true do
     validates :delivery_area_id,  numericality: { other_than: 0, message: "can't be blank" }
     validates :house_number
     validates :item
     validates :municipal_name
     validates :postal_code,       format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :tell
+    validates :tell,              format: { with: VALID_PHONE_NUMBER_REGEX }
     validates :user
     validates :token
   end

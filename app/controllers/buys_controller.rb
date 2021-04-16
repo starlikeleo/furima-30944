@@ -1,10 +1,9 @@
 class  BuysController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_param, only: [:index, :create]
-  # before_action :contributor_confirmation, only: [:index, :create]
 
   def index
-    redirect_to root_path if @item.buy || current_user = @item
+    redirect_to root_path if @item.buy || current_user == @item.user
     @buy_destination = BuyDestination.new
   end
   def create
@@ -31,13 +30,9 @@ class  BuysController < ApplicationController
   end
   def set_param
     @item = Item.find(params[:item_id])
-    @buys = Buy.all
   end
 
   # def contributor_confirmation
-  #   @buys.each do |buy| 
-  #     redirect_to root_path if (@item.id  == buy.item)
-  #   end
   # end
 end
 

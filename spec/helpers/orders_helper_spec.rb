@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+association :user
+association :item
+
 # Specs in this file have access to a helper object that includes
 # the OrdersHelper. For example:
 #

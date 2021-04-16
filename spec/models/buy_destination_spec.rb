@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe BuyDestination, type: :model do
   describe '商品購入情報の保存' do
     before do
-      @buy_destination = FactoryBot.build(:BuyDestination)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @buy_destination = FactoryBot.build(:BuyDestination, user: user.id, item: item.id)
     end
 
     context '商品購入ができるとき' do
@@ -61,6 +63,21 @@ RSpec.describe BuyDestination, type: :model do
         @buy_destination.token = nil
         @buy_destination.valid?
         expect(@buy_destination.errors.full_messages).to include("Token can't be blank")
+      end
+      it "都道府県に'---'が選択されていると保存ができないこと" do
+        @buy_destination.delivery_area_id = '---'
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("Delivery area can't be blank")
+      end
+      it '電話番号が12以上では登録できないこと' do
+        @buy_destination.tell = '0000000000000'
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("Tell is invalid")     
+      end
+      it '電話番号が英数混合では登録できないこと' do
+        @buy_destination.tell = '090abcdefgh'
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("Tell is invalid")     
       end
     end
   end
