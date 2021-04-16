@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = Item.order('created_at DESC')
   end
   def new
     @item = Item.new
@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   def show
   end
   def edit
+    redirect_to root_path if @item.buy
   end
   def destroy
     if @item.destroy
