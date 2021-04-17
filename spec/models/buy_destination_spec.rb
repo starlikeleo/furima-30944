@@ -81,4 +81,6 @@ RSpec.describe BuyDestination, type: :model do
       end
     end
   end
+
+
 end
