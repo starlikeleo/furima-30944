@@ -19,9 +19,7 @@ class ItemsController < ApplicationController
   end
   def show
   end
-  def edit
-    redirect_to root_path if @item.buy
-  end
+
   def destroy
     if @item.destroy
       redirect_to root_path

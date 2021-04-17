@@ -65,7 +65,7 @@ RSpec.describe BuyDestination, type: :model do
         expect(@buy_destination.errors.full_messages).to include("Token can't be blank")
       end
       it "都道府県に'---'が選択されていると保存ができないこと" do
-        @buy_destination.delivery_area_id = '---'
+        @buy_destination.delivery_area_id = '0'
         @buy_destination.valid?
         expect(@buy_destination.errors.full_messages).to include("Delivery area can't be blank")
       end
