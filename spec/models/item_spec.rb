@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  before do
-    @item = FactoryBot.build(:item)
-  end
+  describe '#create' do
+    before do
+      @item = FactoryBot.build(:item)
+    end
 
-  describe '商品の保存' do
     context '商品が保存できる場合' do
       it '適切な情報が入力されたとき、商品が保存される' do
         expect(@item).to be_valid
@@ -90,7 +90,7 @@ RSpec.describe Item, type: :model do
       it '価格が300円未満' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be greater than 300')
+        expect(@item.errors.full_messages).to include('Price must be greater than 299')
       end
       it '価格が10,000,000円以上' do
         @item.price = 10_000_000

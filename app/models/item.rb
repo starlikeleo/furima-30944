@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_date
   belongs_to :user
   has_one_attached :image
+  has_one :buy
 
   with_options numericality: { other_than: 0 } do
     validates :category_id
@@ -25,7 +26,6 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :area_id
     validates :delivery_date_id
-    validates :price, format: { with: /\A[0-9]+\z/ }, numericality: { only_integer: true,
-                                                                      greater_than: 299, less_than: 10_000_000 }
+    validates :price, format: { with: /\A[0-9]+\z/ }, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
   end
 end
