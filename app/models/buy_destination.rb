@@ -3,7 +3,7 @@ class BuyDestination
   include ActiveModel::Model
   attr_accessor :user, :item, :postal_code, :delivery_area_id, :municipal_name, :house_number, :building_name, :tell, :token
 
-  VALID_PHONE_NUMBER_REGEX = /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z|\A0[5789]0[-]?\d{4}[-]?\d{4}\z/
+  VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
 
   with_options presence: true do
     validates :delivery_area_id,  numericality: { other_than: 0, message: "can't be blank" }
